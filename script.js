@@ -95,3 +95,25 @@ function createHeart() {
 }
 
 setInterval(createHeart, 350);
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <section class="result">
+
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="meme-video"
+      >
+        <source src="images/baby.mp4" type="video/mp4">
+      </video>
+
+      <h1>Че натури? </h1>
+
+      <p>Тогда готовься бейба</p>
+
+    </section>
+  `;
+});

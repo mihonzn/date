@@ -310,3 +310,23 @@ body {
       translateY(0);
   }
 }
+
+.meme-video {
+  width: 350px;
+
+  border-radius: 25px;
+
+  margin-bottom: 30px;
+
+  animation: fadeUp 0.7s ease;
+}
+
+.result h1 {
+  font-size: 72px;
+
+  margin-bottom: 20px;
+}
+
+.result p {
+  font-size: 30px;
+}
