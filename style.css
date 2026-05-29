@@ -219,6 +219,7 @@ body {
   }
 }
 
+
 #brainrotOverlay {
   position: fixed;
 
@@ -317,93 +318,65 @@ body {
 }
 
 @media (max-width: 768px) {
-
   body {
     overflow-x: hidden;
     overflow-y: auto;
-
-    display: block;
-
     min-height: 100vh;
   }
 
   .hero {
-    position: relative;
-
-    top: 30px;
-    left: auto;
-
-    transform: none;
-
-    width: 100%;
-
-    text-align: center;
-
-    padding: 0 20px;
+    top: 40px;
+    width: 90%;
   }
 
   .hero h1 {
-    font-size: 42px;
-
-    line-height: 1.2;
+    font-size: 30px;
   }
 
   .buttons {
     width: 100%;
-
     height: auto;
-
-    margin-top: 80px;
+    margin-top: 160px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
-    gap: 30px;
+    gap: 25px;
   }
 
   .btn {
-    position: relative !important;
-
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-
-    transform: none !important;
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
 
     width: 85vw;
-
-    max-width: 340px;
-
-    height: 260px;
-
-    font-size: 42px;
-
-    transition: 0.4s ease;
-  }
-
-  .btn-icon {
-    width: 170px;
-
-    height: 170px;
+    max-width: 360px;
+    height: 240px;
+    font-size: 32px;
   }
 
   .yes:hover {
-    transform: scale(1.03) !important;
+    transform: scale(1.03);
+  }
+
+  .btn-icon {
+    width: 180px;
+    height: 150px;
   }
 
   .no img {
-    width: 170px;
-    height: 170px;
+    width: 180px;
+    height: 150px;
   }
 
   #brainrotOverlay img {
-    width: 92vw;
+    width: 90vw;
   }
 
   .meme-video {
-    width: 92vw;
+    width: 90vw;
+    max-width: 360px;
   }
 }
