@@ -236,30 +236,60 @@ body {
 
 #brainrotOverlay {
   position: fixed;
+
   inset: 0;
+
   display: none;
-  place-items: center;
+
+  justify-content: center;
+  align-items: center;
+
   z-index: 999999;
 }
 
 #brainrotOverlay img {
-  width: 500px;
-  max-width: 85vw;
-  border-radius: 25px;
+  width: 70vw;
+
+  max-width: 900px;
+
+  height: auto;
+
+  border-radius: 30px;
+
+  animation:
+    brainrotShow 0.4s ease,
+    brainrotShake 0.15s infinite;
 }
+
+@keyframes brainrotShow {
+  from {
+    opacity: 0;
+    transform: scale(0.4) rotate(-8deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
 @keyframes brainrotShake {
   0% {
     transform: rotate(0deg);
   }
+
   25% {
     transform: rotate(2deg);
   }
+
   50% {
     transform: rotate(-2deg);
   }
+
   75% {
     transform: rotate(2deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
