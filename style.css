@@ -75,17 +75,18 @@ body {
 }
 
 .buttons {
-  position: relative;
-  width: 1000px;
-  max-width: 100%;
-  height: 500px;
-  margin: 80px auto;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  pointer-events: none;
 }
 
 .yes {
   position: absolute;
-  left: 0;
-  top: 50%;
+  left: 15%;
+  top: 45%;
   transform: translateY(-50%);
   color: #ff4f81;
   background: rgb(255, 255, 255);
@@ -118,7 +119,7 @@ body {
 
   text-align: center;
 
-  font-size: 42px;
+  font-size: 30px;
   font-weight: 800;
   color: white;
 
@@ -129,8 +130,8 @@ body {
 }
 .no {
   position: absolute;
-  right: 0;
-  top: 50%;
+  right: 15%;
+  top: 45%;
   transform: translateY(-50%);
   color: #ff4f81;
   background: white;
@@ -166,7 +167,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-
+  pointer-events: auto;
   will-change: transform, box-shadow;
 
   padding-top: 30px;
@@ -580,14 +581,13 @@ body {
   z-index: 0;
   animation: blurFloat 8s ease-in-out infinite;
 
-.card,
-.herp,
-.buttons,
-.heart {
-  position: relative;
-  z-index: 2;
-}
-
+  .card,
+  .herp,
+  .buttons,
+  .heart {
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .blur-1 {
@@ -617,10 +617,88 @@ body {
 }
 
 @keyframes blurFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
   50% {
     transform: translateY(-30px) scale(1.08);
+  }
+}
+
+.page-exit {
+  animation: pageExit 0.8s ease forwards;
+}
+
+@keyframes pageExit {
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(12px);
+  }
+}
+
+.scared-no {
+  gap: 18px;
+  transition:
+    left 0.08s ease,
+    top 0.08s ease,
+    transform 0.12s ease;
+}
+
+.eyes {
+  display: flex;
+  gap: 28px;
+}
+
+.eyes span {
+  width: 42px;
+  height: 42px;
+
+  background: white;
+  border-radius: 50%;
+
+  position: relative;
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 80, 140, 0.45),
+    0 0 18px rgba(255, 255, 255, 0.8);
+}
+
+.eyes span::after {
+  content: "";
+
+  width: 16px;
+  height: 16px;
+
+  background: #111;
+  border-radius: 50%;
+
+  position: absolute;
+  top: 13px;
+  left: 13px;
+
+  transform: translate(var(--pupil-x, 0px), var(--pupil-y, 0px));
+
+  transition: transform 0.06s linear;
+}
+
+.laugh-cat {
+  width: 120px;
+  height: 120px;
+
+  object-fit: cover;
+
+  border-radius: 18px;
+
+  animation: catLaugh 0.8s infinite alternate;
+}
+@keyframes catLaugh {
+  from {
+    transform: scale(1) rotate(-2deg);
+  }
+
+  to {
+    transform: scale(1.08) rotate(2deg);
   }
 }

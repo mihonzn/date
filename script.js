@@ -1,8 +1,6 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const hearts = document.getElementById("hearts");
-const brainrotOverlay = document.getElementById("brainrotOverlay");
-const brainrotAudio = document.getElementById("brainrotAudio");
 const phrases = [
   "Ты уверена?",
   "Подумай еще ",
@@ -24,9 +22,7 @@ noBtn.addEventListener("click", moveNoButton);
 
 function moveNoButton() {
   if (noClicks >= 7) {
-    brainrotOverlay.style.display = "grid";
-    brainrotAudio.volume = 1;
-    brainrotAudio.play();
+    activateScaredNoButton();
     return;
   }
 
@@ -45,8 +41,7 @@ function moveNoButton() {
   noBtn.style.left = `${x}px`;
   noBtn.style.top = `${y}px`;
 
-  noBtn.textContent = phrases[phraseIndex % phrases.length];
-
+  const currentPhrase = phrases[phraseIndex % phrases.length];
   phraseIndex++;
   noClicks++;
   const randomImage =
@@ -54,7 +49,7 @@ function moveNoButton() {
 
   noBtn.innerHTML = `
     <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-      <span>${phrases[phraseIndex % phrases.length]}</span>
+      <span>${currentPhrase}</span>
 
       <img 
         src="${randomImage}" 
@@ -88,25 +83,31 @@ function createHeart() {
 setInterval(createHeart, 350);
 
 yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <section class="result">
+  document.body.classList.add("page-exit");
 
-      <video
-        autoplay
-        loop
-        muted
-        playsinline
-        class="meme-video"
-      >
-        <source src="images/baby.mp4" type="video/mp4">
-      </video>
+  setTimeout(() => {
+    document.body.classList.remove("page-exit");
 
-      <h1>Че натури? </h1>
+    document.body.innerHTML = `
+      <section class="result">
 
-      <p>Тогда готовься бейба</p>
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="meme-video"
+        >
+          <source src="images/baby.mp4" type="video/mp4">
+        </video>
 
-    </section>
-  `;
+        <h1>Че натури? </h1>
+
+        <p>Пошли тогда)</p>
+
+      </section>
+    `;
+  }, 800);
 });
 
 let lastHeartTime = 0;
@@ -131,3 +132,104 @@ document.addEventListener("mousemove", (event) => {
     heart.remove();
   }, 900);
 });
+
+let scaredMode = false;
+
+function activateScaredNoButton() {
+  if (scaredMode) return;
+
+  scaredMode = true;
+
+  noBtn.classList.add("scared-no");
+
+  noBtn.innerHTML = `
+<video
+  autoplay
+  loop
+  muted
+  playsinline
+  class="laugh-cat"
+>
+  <source src="images/laugh-cat.mp4" type="video/mp4">
+</video>
+
+<span>Не поймаешь)</span>
+  `;
+
+  document.addEventListener("mousemove", (event) => {
+    runAwayFromCursor(event);
+    moveEyes(event);
+  });
+}
+function moveEyes(event) {
+  const eyes = document.querySelectorAll(".eyes span");
+
+  eyes.forEach((eye) => {
+    const rect = eye.getBoundingClientRect();
+
+    const eyeX = rect.left + rect.width / 2;
+    const eyeY = rect.top + rect.height / 2;
+
+    const angle = Math.atan2(event.clientY - eyeY, event.clientX - eyeX);
+
+    const pupilX = Math.cos(angle) * 9;
+    const pupilY = Math.sin(angle) * 9;
+
+    eye.style.setProperty("--pupil-x", `${pupilX}px`);
+    eye.style.setProperty("--pupil-y", `${pupilY}px`);
+  });
+}
+
+function runAwayFromCursor(event) {
+  if (!scaredMode) return;
+
+  const area = document.querySelector(".buttons");
+  const areaRect = area.getBoundingClientRect();
+  const btnRect = noBtn.getBoundingClientRect();
+
+  const btnCenterX = btnRect.left + btnRect.width / 2;
+  const btnCenterY = btnRect.top + btnRect.height / 2;
+
+  const distanceX = btnCenterX - event.clientX;
+  const distanceY = btnCenterY - event.clientY;
+
+  const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+  const safeDistance = Math.max(noBtn.offsetWidth, noBtn.offsetHeight) * 0.75;
+
+  if (distance > safeDistance) return;
+
+  const maxX = area.clientWidth - noBtn.offsetWidth;
+  const maxY = area.clientHeight - noBtn.offsetHeight;
+
+  let speed = 2.4;
+
+  if (distance < 180) {
+    speed = 3.8;
+  }
+
+  let newX = noBtn.offsetLeft + distanceX * speed;
+  let newY = noBtn.offsetTop + distanceY * speed;
+
+  const hitLeft = newX <= 0;
+  const hitRight = newX >= maxX;
+  const hitTop = newY <= 0;
+  const hitBottom = newY >= maxY;
+
+  if (hitLeft || hitRight) {
+    newX = hitLeft ? 0 : maxX;
+    newY += event.clientY < btnCenterY ? 180 : -180;
+  }
+
+  if (hitTop || hitBottom) {
+    newY = hitTop ? 0 : maxY;
+    newX += event.clientX < btnCenterX ? 220 : -220;
+  }
+
+  newX = Math.max(0, Math.min(maxX, newX));
+  newY = Math.max(0, Math.min(maxY, newY));
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = `${newX}px`;
+  noBtn.style.top = `${newY}px`;
+}
