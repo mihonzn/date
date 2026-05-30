@@ -22,15 +22,6 @@ let noClicks = 0;
 
 noBtn.addEventListener("click", moveNoButton);
 
-yesBtn.addEventListener("click", () => {
-  document.body.innerHTML = `
-    <section class="result">
-      <h1>УРААА ❤️</h1>
-      <p>Тогда готовься к лучшему свиданию 😎</p>
-    </section>
-  `;
-});
-
 function moveNoButton() {
   if (noClicks >= 7) {
     brainrotOverlay.style.display = "grid";
@@ -80,9 +71,9 @@ function moveNoButton() {
 
 function createHeart() {
   const heart = document.createElement("span");
-
+  const effects = ["❤️", "🌸", "💮", "💖"];
   heart.className = "heart";
-  heart.textContent = "❤️";
+  heart.textContent = effects[Math.floor(Math.random() * effects.length)];
   heart.style.left = `${Math.random() * 100}vw`;
   heart.style.fontSize = `${Math.random() * 18 + 14}px`;
   heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
@@ -96,7 +87,7 @@ function createHeart() {
 
 setInterval(createHeart, 350);
 
-yesBtn.addEventListener(("click"), () => {
+yesBtn.addEventListener("click", () => {
   document.body.innerHTML = `
     <section class="result">
 
@@ -116,4 +107,27 @@ yesBtn.addEventListener(("click"), () => {
 
     </section>
   `;
+});
+
+let lastHeartTime = 0;
+
+document.addEventListener("mousemove", (event) => {
+  const now = Date.now();
+
+  if (now - lastHeartTime < 80) return;
+
+  lastHeartTime = now;
+
+  const heart = document.createElement("span");
+  heart.className = "cursor-heart";
+  heart.textContent = "❤️";
+
+  heart.style.left = `${event.clientX}px`;
+  heart.style.top = `${event.clientY}px`;
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 900);
 });

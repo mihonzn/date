@@ -18,8 +18,20 @@
 }
 
 .hero h1 {
-  font-size: 46px;
+  font-size: clamp(30px, 4vw, 58px);
   margin-bottom: 12px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 1px;
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 25px rgba(255, 80, 140, 0.8),
+    0 6px 18px rgba(0, 0, 0, 0.18);
+
+  animation: titleFloat 3s ease-in-out infinite;
 }
 
 .hero p {
@@ -27,13 +39,28 @@
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #ff758c, #fa74ac);
+  background: linear-gradient(120deg, #ff7eb3, #ff758c, #ffb3c6, #ff5d8f);
+  background-size: 300% 300%;
+  animation: bgMove 100s ease infinite;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .c .card h1 {
@@ -50,6 +77,7 @@ body {
 .buttons {
   position: relative;
   width: 1000px;
+  max-width: 100%;
   height: 500px;
   margin: 80px auto;
 }
@@ -63,7 +91,13 @@ body {
   background: rgb(255, 255, 255);
   width: 350px;
   height: 300px;
+  box-shadow: 0 0 60px rgba(255, 120, 170, 0.45);
 }
+
+.yes:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
 .btn.icon {
   width: 220px;
   height: 120px;
@@ -76,13 +110,22 @@ body {
 }
 
 .btn span {
-  height: 90px;
+  height: 70px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   text-align: center;
+
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(255, 45, 120, 0.9),
+    0 4px 10px rgba(0, 0, 0, 0.2);
 }
 .no {
   position: absolute;
@@ -100,6 +143,7 @@ body {
   flex-direction: column;
 
   overflow: hidden;
+  box-shadow: 0 0 60px rgba(255, 120, 170, 0.45);
 }
 
 .no img {
@@ -117,16 +161,113 @@ body {
   padding: 35px 60px;
   border-radius: 50px;
   font-size: 38px;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+
+  will-change: transform, box-shadow;
+
   padding-top: 30px;
   gap: 15px;
+
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.18),
+    inset 0 0 20px rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+
+  animation:
+    cardUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    cardGlow 2.4s ease-in-out 2s infinite;
+
   transition:
     left 0.6s ease,
     top 0.6s ease,
-    transform 0.25s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.btn::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: -120%;
+
+  width: 80%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.45),
+    transparent
+  );
+
+  transform: skewX(-25deg);
+  transition: left 0.8s ease;
+
+  pointer-events: none;
+}
+.btn:hover::before {
+  left: 140%;
+}
+@keyframes cardGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.18),
+      0 0 35px rgba(255, 30, 120, 0.25),
+      inset 0 0 20px rgba(255, 255, 255, 0.25);
+  }
+
+  50% {
+    box-shadow:
+      0 30px 90px rgba(255, 30, 120, 0.85),
+      0 0 130px rgba(255, 0, 100, 0.55),
+      inset 0 0 45px rgba(255, 180, 220, 0.55);
+  }
+}
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+
+    box-shadow:
+      0 0 25px rgba(255, 255, 255, 0.12),
+      0 0 45px rgba(255, 120, 170, 0.12);
+  }
+
+  50% {
+    opacity: 0.65;
+
+    box-shadow:
+      0 0 45px rgba(255, 255, 255, 0.35),
+      0 0 90px rgba(255, 120, 170, 0.35);
+  }
+}
+@keyframes cardUp {
+  from {
+    opacity: 0;
+    transform: translateY(120px) scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.btn:hover {
+  transform: translateY(-12px) scale(1.05) rotate(-1deg);
+  box-shadow:
+    0 25px 70px rgba(255, 80, 140, 0.45),
+    inset 0 0 25px rgba(255, 255, 255, 0.35);
 }
 
 .btn-icon {
@@ -134,10 +275,16 @@ body {
   height: 200px;
   object-fit: cover;
   border-radius: 18px;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.yes:hover {
-  transform: translateY(-50%) scale(1.08);
+.btn:hover .btn-icon {
+  transform: scale(1.08);
+
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.45);
 }
 
 .heart {
@@ -219,7 +366,6 @@ body {
   }
 }
 
-
 #brainrotOverlay {
   position: fixed;
 
@@ -284,16 +430,12 @@ body {
 @keyframes dropDown {
   from {
     opacity: 0;
-    transform:
-      translateX(-50%)
-      translateY(-120px);
+    transform: translateX(-50%) translateY(-120px);
   }
 
   to {
     opacity: 1;
-    transform:
-      translateX(-50%)
-      translateY(0);
+    transform: translateX(-50%) translateY(0);
   }
 }
 
@@ -317,7 +459,7 @@ body {
   font-size: 30px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -378,5 +520,107 @@ body {
   .meme-video {
     width: 90vw;
     max-width: 360px;
+  }
+}
+
+@keyframes titleGradient {
+  0% {
+    background-position: 0%;
+  }
+
+  50% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: 0%;
+  }
+}
+
+@keyframes titleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.cursor-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+
+  font-size: 18px;
+
+  animation: cursorHeart 0.9s ease forwards;
+
+  filter: drop-shadow(0 0 8px rgba(255, 80, 140, 0.8));
+}
+
+@keyframes cursorHeart {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -90%) scale(0.4) rotate(25deg);
+  }
+}
+
+.bg-blur {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(55px);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+  animation: blurFloat 8s ease-in-out infinite;
+
+.card,
+.herp,
+.buttons,
+.heart {
+  position: relative;
+  z-index: 2;
+}
+
+}
+
+.blur-1 {
+  width: 280px;
+  height: 280px;
+  background: #ffffff;
+  top: 12%;
+  left: 8%;
+}
+
+.blur-2 {
+  width: 350px;
+  height: 350px;
+  background: #ff2f7d;
+  bottom: 8%;
+  right: 10%;
+  animation-delay: 1.5s;
+}
+
+.blur-3 {
+  width: 220px;
+  height: 220px;
+  background: #ffd1e3;
+  top: 45%;
+  left: 45%;
+  animation-delay: 3s;
+}
+
+@keyframes blurFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.08);
   }
 }
