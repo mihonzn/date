@@ -467,7 +467,7 @@ body {
 }
 
 .meme-video {
-  width: 350px;
+  width: 250px;
 
   border-radius: 25px;
 
@@ -760,10 +760,10 @@ body {
 }
 
 .baby-side {
-  position: absolute;
+  position: fixed;
 
-  right: 70px;
-  top: 60px;
+  right: 25px;
+  top: 25px;
 
   display: flex;
   flex-direction: column;
@@ -1007,6 +1007,82 @@ body {
   .btn,
   .final-card {
     backdrop-filter: none !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.18) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
   }
+}
+.time-picker {
+  margin-top: 24px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.time-picker label {
+  color: white;
+
+  font-size: 18px;
+  letter-spacing: 2px;
+
+  opacity: 0.85;
+}
+
+.time-picker input {
+  width: 180px;
+  height: 48px;
+  padding: 8px 14px;
+  border: 2px solid white;
+  border-radius: 16px;
+  background: white;
+  color: #ff4f81;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+}
+.time-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.time-btn {
+  padding: 10px 12px;
+  border: 2px solid white;
+  border-radius: 18px;
+  background: white;
+  color: #ff4f81;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.time-btn:hover,
+.time-btn.active {
+  transform: scale(1.07);
+  background: #ff4f81;
+  color: white;
+}
+@media (max-width: 900px) {
+  .baby-side {
+    display: none;
+  }
+}
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+* {
+  user-select: none;
 }

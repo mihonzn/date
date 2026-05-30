@@ -150,9 +150,6 @@ yesBtn.addEventListener("click", () => {
   </button>
 
 </div>
-
-<input type="date" class="custom-date">
-
 </section>
 <div class="baby-side">
 
@@ -168,7 +165,6 @@ yesBtn.addEventListener("click", () => {
 
   <div class="baby-text">
     <h2>Че внатуре?</h2>
-    <p>Пошли тогда)</p>
   </div>
 
 </div>
@@ -195,18 +191,50 @@ function showDateResult(selectedDate) {
   localStorage.setItem("selectedDate", selectedDate);
 
   document.querySelector(".date-step").innerHTML = `
-    <h1>Отлично 😭</h1>
+    <h1>Отлично</h1>
 
     <p class="selected-date">
       Свидание: ${selectedDate}
     </p>
 
+    <div class="time-picker">
+  <label>Выбери время 🕒</label>
+
+ <div class="time-options">
+  <button class="time-btn" data-time="12:00">12:00</button>
+  <button class="time-btn" data-time="13:00">13:00</button>
+  <button class="time-btn" data-time="14:00">14:00</button>
+  <button class="time-btn" data-time="15:00">15:00</button>
+  <button class="time-btn" data-time="16:00">16:00</button>
+  <button class="time-btn" data-time="17:00">17:00</button>
+  <button class="time-btn" data-time="18:00">18:00</button>
+  <button class="time-btn" data-time="19:00">19:00</button>
+  <button class="time-btn" data-time="20:00">20:00</button>
+</div>
+
+  <input type="hidden" id="dateTime">
+</div>
+
     <button class="next-btn">
-      Дальше 
+      Дальше
     </button>
   `;
+  document.querySelectorAll(".time-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".time-btn").forEach((b) => {
+        b.classList.remove("active");
+      });
 
+      btn.classList.add("active");
+      document.getElementById("dateTime").value = btn.dataset.time;
+    });
+  });
   document.querySelector(".next-btn").addEventListener("click", () => {
+    const timeInput = document.getElementById("dateTime");
+    const selectedTime = timeInput ? timeInput.value : "";
+
+    localStorage.setItem("selectedTime", selectedTime);
+
     document.body.classList.add("page-exit");
 
     setTimeout(() => {
@@ -387,3 +415,11 @@ function runAwayFromCursor(event) {
   noBtn.style.left = `${newX}px`;
   noBtn.style.top = `${newY}px`;
 }
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+document.addEventListener("selectstart", (e) => {
+  e.preventDefault();
+});

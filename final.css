@@ -384,3 +384,17 @@ body::before {
 
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.45);
 }
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+* {
+  user-select: none;
+}

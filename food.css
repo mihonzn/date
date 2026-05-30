@@ -664,3 +664,17 @@ body.preview-active .food-preview-bg {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
   }
 }
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+img {
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+* {
+  user-select: none;
+}

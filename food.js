@@ -165,3 +165,11 @@ backFoodBtn.addEventListener("click", () => {
   document.querySelector(".food-page").classList.remove("blur-active");
   document.querySelector(".food-actions").classList.remove("active");
 });
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});
+document.addEventListener("selectstart", (e) => {
+  e.preventDefault();
+});
