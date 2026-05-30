@@ -216,14 +216,15 @@ function runAwayFromCursor(event) {
   const hitTop = newY <= 0;
   const hitBottom = newY >= maxY;
 
-  if (hitLeft || hitRight) {
+  if ((hitLeft || hitRight) && (hitTop || hitBottom)) {
+    newX = Math.random() * maxX;
+    newY = Math.random() * maxY;
+  } else if (hitLeft || hitRight) {
     newX = hitLeft ? 0 : maxX;
-    newY += event.clientY < btnCenterY ? 180 : -180;
-  }
-
-  if (hitTop || hitBottom) {
+    newY += event.clientY < btnCenterY ? 260 : -260;
+  } else if (hitTop || hitBottom) {
     newY = hitTop ? 0 : maxY;
-    newX += event.clientX < btnCenterX ? 220 : -220;
+    newX += event.clientX < btnCenterX ? 280 : -280;
   }
 
   newX = Math.max(0, Math.min(maxX, newX));
