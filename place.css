@@ -15,7 +15,10 @@ body {
 
   font-family: "Comfortaa", sans-serif;
 
-  background: linear-gradient(120deg, #8f6bff, #a855f7, #c084fc, #7c3aed);
+  background:
+    radial-gradient(circle at top left, #c084fc55, transparent 35%),
+    radial-gradient(circle at bottom right, #7c3aed66, transparent 40%),
+    linear-gradient(120deg, #6d3df5, #8b5cf6, #a855f7, #7c3aed);
 
   background-size: 300% 300%;
 
@@ -37,7 +40,8 @@ body {
 }
 
 .place-page {
-  text-align: center;
+  position: relative;
+  z-index: 5;
 }
 
 .place-page h1 {
@@ -215,4 +219,342 @@ body {
 .place-card:hover::before {
   opacity: 1;
   transform: scale(1);
+}
+.stars {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.9) 2px, transparent 2px),
+    radial-gradient(rgba(255, 255, 255, 0.55) 3px, transparent 3px),
+    radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+
+  background-size:
+    220px 220px,
+    340px 340px,
+    480px 480px;
+
+  background-position:
+    0 0,
+    80px 120px,
+    160px 200px;
+
+  opacity: 0.55;
+
+  animation: starsMove 60s linear infinite;
+}
+.stars::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(white 6px, transparent 6px),
+    radial-gradient(#ffffffcc 4px, transparent 4px),
+    radial-gradient(#ffffff99 5px, transparent 5px);
+
+  background-size:
+    600px 600px,
+    900px 900px,
+    1200px 1200px;
+
+  background-position:
+    200px 150px,
+    700px 400px,
+    1200px 300px;
+
+  opacity: 0.4;
+
+  filter: blur(1px);
+
+  animation: starsPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes starsPulse {
+  from {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0.5;
+    transform: scale(1.03);
+  }
+}
+@keyframes starsMove {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-120px);
+  }
+}
+.bg-blur {
+  position: fixed;
+
+  border-radius: 50%;
+
+  filter: blur(90px);
+
+  opacity: 0.45;
+
+  pointer-events: none;
+
+  animation: floatBlur 10s ease-in-out infinite;
+}
+
+.blur-1 {
+  width: 320px;
+  height: 320px;
+
+  background: #ffffff55;
+
+  top: 10%;
+  left: 5%;
+}
+.blur-2 {
+  width: 420px;
+  height: 420px;
+
+  background: #a855f7;
+
+  bottom: -40px;
+  right: -40px;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.9) 2px, transparent 2px),
+    radial-gradient(rgba(255, 255, 255, 0.55) 3px, transparent 3px),
+    radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+
+  background-size:
+    220px 220px,
+    340px 340px,
+    480px 480px;
+
+  opacity: 0.55;
+
+  animation: starsMove 60s linear infinite;
+}
+.blur-3 {
+  width: 260px;
+  height: 260px;
+
+  background: #ffffff33;
+
+  top: 45%;
+  left: 45%;
+}
+
+@keyframes floatBlur {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-25px);
+  }
+}
+.butterflies {
+  position: fixed;
+  inset: 0;
+  transition: opacity 0.5s ease;
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+body.night-mode .butterflies {
+  opacity: 0;
+}
+.butterfly {
+  position: absolute;
+
+  font-size: 34px;
+
+  opacity: 0.85;
+
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7));
+}
+
+.place-preview-bg {
+  position: fixed;
+  inset: 0;
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0;
+  filter: blur(18px) brightness(0.55);
+
+  transform: scale(1.08);
+
+  transition: 0.45s ease;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.preview-active .place-preview-bg {
+  opacity: 0.55;
+}
+.theme-toggle {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+
+  z-index: 20;
+
+  padding: 14px 22px;
+
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-radius: 24px;
+
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 700;
+
+  color: white;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(14px);
+
+  cursor: pointer;
+}
+
+body.night-mode {
+background:
+  radial-gradient(circle at top, #ffffff22, transparent 18%),
+  radial-gradient(circle at bottom, #3b1d74, transparent 35%),
+  linear-gradient(160deg, #05010d, #120024, #240046, #10002b);
+}
+.fireflies {
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  overflow: hidden;
+
+  z-index: 1;
+
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.night-mode .fireflies {
+  opacity: 1;
+}
+
+.firefly {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #fff6b0;
+
+  box-shadow:
+    0 0 10px #fff6b0,
+    0 0 20px #ffe066,
+    0 0 40px #ffd43b;
+
+  opacity: 0.8;
+}
+body.night-mode .stars {
+  opacity: 0.9;
+
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,0.8));
+}
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-y: auto;
+  }
+
+  h1 {
+    font-size: 42px !important;
+    line-height: 1.2;
+  }
+
+  .food-cards,
+  .place-cards {
+    width: 100%;
+    height: auto;
+
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .food-card,
+  .place-card {
+    position: relative !important;
+
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+
+    width: 180px;
+    height: 180px;
+
+    font-size: 42px;
+  }
+
+  .food-card span,
+  .place-card span {
+    font-size: 18px;
+  }
+
+  .food-card.selected,
+  .place-card.selected {
+    position: relative !important;
+
+    transform: scale(1.08) !important;
+  }
+
+  .food-actions {
+    bottom: 20px;
+
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .action-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+  .food-page,
+  .place-page {
+    padding:
+      90px 20px
+      120px;
+  }
 }

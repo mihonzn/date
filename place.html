@@ -1,54 +1,56 @@
 <!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Место свидания</title>
+    <title>Место свидания</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="place.css" />
-</head>
+    <link rel="stylesheet" href="place.css" />
+  </head>
 
-<body>
+  <body>
+    <div class="bg-blur blur-1"></div>
+    <div class="bg-blur blur-2"></div>
+    <div class="bg-blur blur-3"></div>
+    <div class="stars"></div>
+    <div class="fireflies"></div>
+    <div class="place-preview-bg"></div>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
+    <div class="butterflies"></div>
+    <section class="place-page">
+      <h1>Чем займемся?</h1>
 
-  <div class="bg-blur blur-1"></div>
-  <div class="bg-blur blur-2"></div>
-  <div class="bg-blur blur-3"></div>
+      <div class="place-cards">
+        <button class="place-card" data-place="Прогулка по парку">
+          🌳
+          <span>Прогулка по парку</span>
+        </button>
 
-  <section class="place-page">
+        <button class="place-card" data-place="Прогулка на конях">
+          🐴
+          <span>Прогулка на конях</span>
+        </button>
 
-    <h1>Чем займемся?</h1>
+        <button class="place-card" data-place="Кино под открытым небом">
+          🎬
+          <span>Кино под открытым небом</span>
+        </button>
 
-    <div class="place-cards">
-
-      <button class="place-card">
-        🌳
-        <span>Прогулка по парку</span>
-      </button>
-
-      <button class="place-card">
-        🐴
-        <span>Прогулка на конях</span>
-      </button>
-
-      <button class="place-card">
-        🎬
-        <span>Кино под открытым небом</span>
-      </button>
-
-      <button class="place-card">
-        🍽️
-        <span>Кафе / ресторан</span>
-      </button>
-
-    </div>
-
-  </section>
-<script src="place.js"></script>
-</body>
+        <button class="place-card" data-place="Кафе / ресторан">
+          🍽️
+          <span>Кафе / ресторан</span>
+        </button>
+      </div>
+    </section>
+    <script src="place.js"></script>
+  </body>
 </html>
