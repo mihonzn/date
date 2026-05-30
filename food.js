@@ -5,6 +5,28 @@ const foodVideos = {
     "images/fastfood2.mp4",
     "images/fastfood3.mp4",
   ],
+
+  Острое: [
+    "images/spicyfood1.mp4",
+    "images/spicyfood2.mp4",
+    "images/spicyfood3.mp4",
+  ],
+
+  Особенное: ["images/osoboe1.mp4", "images/osoboe2.mp4", "images/osoboe3.mp4"],
+};
+let foodImageInterval = null;
+
+const foodSlides = {
+  "Классическая еда": [
+    "images/classic1.jpg",
+    "images/classic2.jpg",
+    "images/classic3.jpg",
+  ],
+  Перекус: [
+    "images/perekus1.jpg",
+    "images/perekus2.jpg",
+    "images/perekus3.jpg",
+  ],
 };
 const foodCards = document.querySelectorAll(".food-card");
 const foodPreviewBg = document.querySelector(".food-preview-bg");
@@ -33,8 +55,37 @@ foodCards.forEach((card, index) => {
     document.querySelector(".food-page").classList.add("blur-active");
 
     foodCards.forEach((c) => {
+      const oldVideo = c.querySelector(".food-video");
+
+      if (oldVideo) {
+        oldVideo.pause();
+        oldVideo.currentTime = 0;
+      }
+
       c.classList.remove("selected");
+      c.disabled = true;
     });
+
+    const slides = foodSlides[card.dataset.food];
+
+    if (slides) {
+      let slideIndex = 0;
+
+      function changeFoodSlide() {
+        card.style.backgroundImage = `url("${slides[slideIndex]}")`;
+        card.style.backgroundSize = "cover";
+        card.style.backgroundPosition = "center";
+
+        slideIndex = (slideIndex + 1) % slides.length;
+      }
+
+      changeFoodSlide();
+
+      clearInterval(foodImageInterval);
+
+      foodImageInterval = setInterval(changeFoodSlide, 3500);
+    }
+    card.disabled = false;
 
     card.classList.add("selected");
     const video = card.querySelector(".food-video");
@@ -80,7 +131,7 @@ confirmFoodBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     window.location.href = "final.html";
-  }, 700);
+  }, 800);
 });
 
 backFoodBtn.addEventListener("click", () => {
@@ -89,12 +140,25 @@ backFoodBtn.addEventListener("click", () => {
   if (activeVideo) {
     activeVideo.pause();
     activeVideo.currentTime = 0;
-    clearInterval(foodVideoInterval);
+  }
+  clearInterval(foodVideoInterval);
+  clearInterval(foodImageInterval);
+
+  if (selectedCard) {
+    selectedCard.style.backgroundImage = "";
   }
   selectedCard = null;
 
   foodCards.forEach((c) => {
+    const oldVideo = c.querySelector(".food-video");
+
+    if (oldVideo) {
+      oldVideo.pause();
+      oldVideo.currentTime = 0;
+    }
+
     c.classList.remove("selected");
+    c.disabled = false;
   });
 
   document.querySelector(".food-cards").classList.remove("has-selected");

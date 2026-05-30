@@ -19,60 +19,45 @@
 
   <body>
     <div class="food-preview-bg"></div>
-
+    <img src="images/hamstereating.gif" class="hamster-gif" alt="hamster" />
     <section class="food-page">
       <h1>Что будем кушать?</h1>
 
       <div class="food-cards">
-        <div class="food-cards">
-          <button class="food-card" data-food="Фастфуд">
-            <video class="food-video" muted loop playsinline></video>
+        <button class="food-card" data-food="Фастфуд">
+          <video class="food-video" muted loop playsinline></video>
+          🍔
+          <span>Фастфуд</span>
+        </button>
 
-            🍔
-            <span>Фастфуд</span>
-          </button>
+        <button class="food-card" data-food="Классическая еда">
+          <video class="food-video" muted loop playsinline></video>
+          🍛
+          <span>Классическая еда</span>
+        </button>
 
-          <button
-            class="food-card"
-            data-food="Классическая еда"
-            data-video="images/classic.mp4"
-          >
-            🍛
-            <span>Классическая еда</span>
-          </button>
+        <button class="food-card" data-food="Перекус">
+          <video class="food-video" muted loop playsinline></video>
+          🥪
+          <span>Перекус</span>
+        </button>
 
-          <button
-            class="food-card"
-            data-food="Перекус"
-            data-video="images/snack.mp4"
-          >
-            🥪
-            <span>Перекус</span>
-          </button>
+        <button class="food-card" data-food="Особенное">
+          <video class="food-video" muted loop playsinline></video>
+          ✨
+          <span>Особенное</span>
+        </button>
 
-          <button
-            class="food-card"
-            data-food="Особенное"
-            data-video="images/special.mp4"
-          >
-            ✨
-            <span>Особенное</span>
-          </button>
+        <button class="food-card" data-food="Острое">
+          <video class="food-video" muted loop playsinline></video>
+          🌶️
+          <span>Острое</span>
+        </button>
+      </div>
 
-          <button
-            class="food-card"
-            data-food="Острое"
-            data-video="images/spicy.mp4"
-          >
-            🌶️
-            <span>Острое</span>
-          </button>
-        </div>
-        <div class="food-actions">
-          <button id="backFoodBtn" class="action-btn secondary">Назад</button>
-
-          <button id="confirmFoodBtn" class="action-btn">Подтвердить</button>
-        </div>
+      <div class="food-actions">
+        <button id="backFoodBtn" class="action-btn secondary">Назад</button>
+        <button id="confirmFoodBtn" class="action-btn">Подтвердить</button>
       </div>
     </section>
 

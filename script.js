@@ -211,7 +211,7 @@ function showDateResult(selectedDate) {
 
     setTimeout(() => {
       window.location.href = "place.html";
-    }, 700);
+    }, 800);
   });
 }
 

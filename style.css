@@ -39,6 +39,7 @@
 }
 
 body {
+  animation: pageEnter 0.8s ease forwards;
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -50,7 +51,31 @@ body {
   background-size: 300% 300%;
   animation: bgMove 100s ease infinite;
 }
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: blur(14px);
+  }
 
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+.page-exit {
+  animation: pageExitSmooth 0.8s ease forwards;
+}
+
+@keyframes pageExitSmooth {
+  to {
+    opacity: 0;
+    transform: scale(1.12);
+    filter: blur(16px);
+  }
+}
 @keyframes bgMove {
   0% {
     background-position: 0% 50%;
@@ -953,4 +978,35 @@ body {
   border-radius: 28px;
 
   background: rgba(255, 255, 255, 0.35);
+}
+@media (max-width: 768px) {
+  * {
+    animation-duration: 0.01ms !important;
+  }
+
+  .stars,
+  .fireflies,
+  .butterflies,
+  .bg-blur,
+  .food-preview-bg,
+  .place-preview-bg {
+    display: none !important;
+  }
+
+  .food-video {
+    display: none !important;
+  }
+
+  body {
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .food-card,
+  .place-card,
+  .btn,
+  .final-card {
+    backdrop-filter: none !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18) !important;
+  }
 }

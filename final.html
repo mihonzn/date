@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>План утверждён</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="final.css" />
+  </head>
+
+  <body>
+    <div class="final-bg"></div>
+    <div class="classified">CLASSIFIED</div>
+    <section class="final-card">
+      <p class="mission-label">МИССИЯ</p>
+
+      <h1>СВИДАНИЕ</h1>
+
+      <p class="status-text">СТАТУС: <span>УТВЕРЖДЕНО</span></p>
+
+      <p class="subtitle">Отмена невозможна.</p>
+
+      <div class="approved-stamp">APPROVED</div>
+
+      <div class="summary">
+        <div class="summary-item">📅 <span id="finalDate">Дата</span></div>
+        <div class="summary-item">📍 <span id="finalPlace">Место</span></div>
+        <div class="summary-item">🍔 <span id="finalFood">Еда</span></div>
+      </div>
+
+      <button class="finish-btn">Принять неизбежное</button>
+      <p class="final-warning">Ты уже нажала «Да»)</p>
+    </section>
+
+    <script src="final.js"></script>
+    <audio id="stampSound" src="music/stamp.mp3"></audio>
+  </body>
+</html>

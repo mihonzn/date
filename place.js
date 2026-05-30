@@ -43,8 +43,8 @@ function createButterfly() {
 
   animate();
   setTimeout(() => {
-  butterfly.remove();
-}, 6000);
+    butterfly.remove();
+  }, 6000);
 }
 
 setInterval(createButterfly, 4000);
@@ -131,6 +131,6 @@ placeCards.forEach((card) => {
 
     setTimeout(() => {
       window.location.href = "food.html";
-    }, 700);
+    }, 800);
   });
 });
