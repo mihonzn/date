@@ -1,0 +1,218 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  font-family: "Comfortaa", sans-serif;
+
+  background: linear-gradient(120deg, #8f6bff, #a855f7, #c084fc, #7c3aed);
+
+  background-size: 300% 300%;
+
+  animation: bgMove 18s ease infinite;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.place-page {
+  text-align: center;
+}
+
+.place-page h1 {
+  font-size: 72px;
+
+  margin-bottom: 60px;
+
+  color: white;
+
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 30px rgba(170, 100, 255, 0.8);
+}
+
+.place-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 30px;
+}
+
+.place-card {
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  width: 320px;
+  height: 220px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 40px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  backdrop-filter: blur(14px);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 18px;
+
+  font-size: 58px;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.12);
+}
+.place-card::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+
+  transform: scale(1.15);
+
+  z-index: 1;
+}
+.place-card span {
+  position: relative;
+  z-index: 3;
+
+  font-size: 24px;
+  font-weight: 700;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(0, 0, 0, 0.35);
+}
+.place-card:hover span {
+  opacity: 0;
+
+  transform: scale(0.7);
+}
+.place-card:hover {
+  transform: translateY(-14px) scale(1.08);
+
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.25),
+    0 0 90px rgba(160, 100, 255, 0.65);
+
+  backdrop-filter: blur(22px);
+}
+.place-card:hover::before {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+.place-card img {
+  width: 230px;
+  height: 130px;
+
+  object-fit: cover;
+
+  border-radius: 26px;
+
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.25);
+}
+
+.place-card:hover img {
+  transform: scale(1.05);
+}
+
+.page-exit {
+  animation: pageExit 0.8s ease forwards;
+}
+@keyframes zoomExit {
+  to {
+    opacity: 0;
+    transform: scale(1.25);
+    filter: blur(18px);
+  }
+}
+body {
+  animation:
+    bgMove 18s ease infinite,
+    zoomEnter 0.8s ease forwards;
+}
+
+@keyframes zoomEnter {
+  from {
+    opacity: 0;
+    transform: scale(1.25);
+    filter: blur(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+.place-card:nth-child(1)::before {
+  background-image: url("images/park.jpg");
+}
+
+.place-card:nth-child(2)::before {
+  background-image: url("images/horse.jpg");
+}
+
+.place-card:nth-child(3)::before {
+  background-image: url("images/cinema.jpg");
+}
+
+.place-card:nth-child(4)::before {
+  background-image: url("images/cafe.jpg");
+}
+.place-card {
+  font-size: 58px;
+}
+
+.place-card:hover {
+  color: transparent;
+}
+.place-card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}

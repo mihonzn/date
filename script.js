@@ -5,7 +5,7 @@ const phrases = [
   "Ты уверена?",
   "Подумай еще ",
   "УААААААААААААААААААААААА",
-  "Error 404",
+  "НЕГЕ?",
 ];
 const sadImageList = [
   "images/cat1.jpg",
@@ -82,6 +82,45 @@ function createHeart() {
 
 setInterval(createHeart, 350);
 
+function formatDate(date) {
+  return date.toLocaleDateString("ru-RU");
+}
+
+function getDateText(type) {
+  const today = new Date();
+  const result = new Date(today);
+
+  if (type === "today") {
+    return `Сегодня: ${formatDate(result)}`;
+  }
+
+  if (type === "tomorrow") {
+    result.setDate(today.getDate() + 1);
+    return `Завтра: ${formatDate(result)}`;
+  }
+
+  if (type === "weekend") {
+    const day = today.getDay();
+    const daysToSaturday = (6 - day + 7) % 7 || 7;
+
+    result.setDate(today.getDate() + daysToSaturday);
+
+    return `Выходные: ${formatDate(result)}`;
+  }
+
+  if (type === "custom") {
+    const customInput = document.querySelector(".custom-date");
+
+    if (!customInput.value) {
+      return "Дата не выбрана 😭";
+    }
+
+    const formatted = new Date(customInput.value).toLocaleDateString("ru-RU");
+
+    return `Выбрано: ${formatted}`;
+  }
+}
+
 yesBtn.addEventListener("click", () => {
   document.body.classList.add("page-exit");
 
@@ -89,26 +128,140 @@ yesBtn.addEventListener("click", () => {
     document.body.classList.remove("page-exit");
 
     document.body.innerHTML = `
-      <section class="result">
+  <section class="result date-step">
+    <h1>Выбери дату 📅</h1>
 
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="meme-video"
-        >
-          <source src="images/baby.mp4" type="video/mp4">
-        </video>
+  <div class="date-buttons">
 
-        <h1>Че натури? </h1>
+  <button class="date-btn" data-type="today">
+    Сегодня
+  </button>
 
-        <p>Пошли тогда)</p>
+  <button class="date-btn" data-type="tomorrow">
+    Завтра
+  </button>
 
-      </section>
-    `;
+  <button class="date-btn" data-type="weekend">
+    На выходных
+  </button>
+
+  <button class="date-btn" data-type="custom">
+    Выбрать самой
+  </button>
+
+</div>
+
+<input type="date" class="custom-date">
+
+</section>
+<div class="baby-side">
+
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    class="meme-video"
+  >
+    <source src="images/baby.mp4" type="video/mp4">
+  </video>
+
+  <div class="baby-text">
+    <h2>Че внатуре?</h2>
+    <p>Пошли тогда)</p>
+  </div>
+
+</div>
+`;
+    const dateButtons = document.querySelectorAll(".date-btn");
+
+    dateButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const type = btn.dataset.type;
+
+        if (type === "custom") {
+          openCalendarModal();
+          return;
+        }
+
+        const selectedDate = getDateText(type);
+        showDateResult(selectedDate);
+      });
+    });
   }, 800);
 });
+
+function showDateResult(selectedDate) {
+  localStorage.setItem("selectedDate", selectedDate);
+
+  document.querySelector(".date-step").innerHTML = `
+    <h1>Отлично 😭</h1>
+
+    <p class="selected-date">
+      Свидание: ${selectedDate}
+    </p>
+
+    <button class="next-btn">
+      Дальше 
+    </button>
+  `;
+
+  document.querySelector(".next-btn").addEventListener("click", () => {
+    document.body.classList.add("page-exit");
+
+    setTimeout(() => {
+      window.location.href = "place.html";
+    }, 700);
+  });
+}
+
+function openCalendarModal() {
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="calendar-modal">
+      <div class="calendar-box">
+        <h2>Выбери дату 📅</h2>
+
+      <div class="cute-calendar">
+  <div class="calendar-title">Выбери день 💖</div>
+  <div class="calendar-days" id="calendarDays"></div>
+</div>
+      </div>
+    </div>
+    `,
+  );
+  function renderCuteCalendar() {
+    const calendarDays = document.getElementById("calendarDays");
+
+    const today = new Date();
+    const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 31);
+
+    let current = new Date(today);
+
+    calendarDays.innerHTML = "";
+
+    while (current <= nextMonth) {
+      const btn = document.createElement("button");
+
+      btn.textContent = current.getDate();
+
+      const savedDate = new Date(current);
+
+      btn.addEventListener("click", () => {
+        const selectedDate = `Выбрано: ${savedDate.toLocaleDateString("ru-RU")}`;
+
+        showDateResult(selectedDate);
+        document.querySelector(".calendar-modal").remove();
+      });
+
+      calendarDays.appendChild(btn);
+
+      current.setDate(current.getDate() + 1);
+    }
+  }
+  renderCuteCalendar();
+}
 
 let lastHeartTime = 0;
 
