@@ -580,34 +580,41 @@ body.night-mode .stars {
   }
 }
 @media (max-width: 768px) {
-  * {
-    animation-duration: 0.01ms !important;
-  }
-
-  .stars,
-  .fireflies,
-  .butterflies,
-  .bg-blur,
-  .food-preview-bg,
-  .place-preview-bg {
-    display: none !important;
-  }
-
-  .food-video {
-    display: none !important;
-  }
-
   body {
-    filter: none !important;
-    backdrop-filter: none !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: flex-start;
+    padding: 40px 18px;
   }
 
-  .food-card,
-  .place-card,
-  .btn,
-  .final-card {
-    backdrop-filter: none !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
+  .place-page h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 90px 0 35px;
+  }
+
+  .place-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .place-card {
+    width: 280px;
+    height: 230px;
+    font-size: 54px;
+  }
+
+  .place-card span {
+    font-size: 23px;
+    text-align: center;
+  }
+
+  .theme-toggle {
+    top: 18px;
+    right: 18px;
   }
 }
 * {
@@ -618,9 +625,34 @@ body.night-mode .stars {
 }
 img {
   pointer-events: none;
-  user-drag: none;
   -webkit-user-drag: none;
 }
 * {
   user-select: none;
+}
+@media (max-width: 768px) {
+  .place-page h1 {
+    margin: 70px 0 30px !important;
+    font-size: 46px !important;
+  }
+
+  .place-card {
+    width: 320px !important;
+    max-width: 90vw !important;
+    height: 200px !important;
+    font-size: 40px !important;
+    animation: none !important;
+    transition: none !important;
+    border-radius: 35px !important;
+  }
+
+  .place-card:hover {
+    transform: none !important;
+  }
+
+  .place-card span {
+    font-size: 22px !important;
+    max-width: 220px;
+    line-height: 1.2;
+  }
 }

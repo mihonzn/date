@@ -610,7 +610,7 @@ body {
   animation: blurFloat 8s ease-in-out infinite;
 
   .card,
-  .herp,
+  .hero,
   .buttons,
   .heart {
     position: relative;
@@ -786,9 +786,11 @@ body {
   margin-top: 5px;
 }
 
-.date-step h1 {
-  margin-top: 180px;
-  font-size: 72px;
+@media (max-width: 768px) {
+  .date-step h1 {
+    font-size: 56px !important;
+    line-height: 1.1;
+  }
 }
 
 .date-buttons {
@@ -980,34 +982,60 @@ body {
   background: rgba(255, 255, 255, 0.35);
 }
 @media (max-width: 768px) {
-  * {
-    animation-duration: 0.01ms !important;
-  }
-
-  .stars,
-  .fireflies,
-  .butterflies,
-  .bg-blur,
-  .food-preview-bg,
-  .place-preview-bg {
-    display: none !important;
-  }
-
-  .food-video {
-    display: none !important;
-  }
-
   body {
-    filter: none !important;
-    backdrop-filter: none !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 18px;
   }
 
-  .food-card,
-  .place-card,
+  .hero {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin-bottom: 35px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+    line-height: 1.25;
+  }
+
+  .buttons {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    pointer-events: auto;
+  }
+
   .btn,
-  .final-card {
-    backdrop-filter: none !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
+  .yes,
+  .no {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 360px;
+    height: 260px;
+    margin: 0 auto;
+  }
+
+  .btn span {
+    font-size: 34px;
+  }
+
+  .btn-icon {
+    width: 210px;
+    height: 150px;
   }
 }
 .time-picker {
@@ -1067,11 +1095,6 @@ body {
   background: #ff4f81;
   color: white;
 }
-@media (max-width: 900px) {
-  .baby-side {
-    display: none;
-  }
-}
 * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1080,9 +1103,62 @@ body {
 }
 img {
   pointer-events: none;
-  user-drag: none;
   -webkit-user-drag: none;
 }
 * {
   user-select: none;
+}
+@media (max-width: 768px) {
+  .btn {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .btn:hover,
+  .yes:hover,
+  .no:hover {
+    transform: none !important;
+  }
+
+  .yes,
+  .no {
+    width: 290px !important;
+    height: 190px !important;
+    padding: 18px !important;
+    border-radius: 42px !important;
+  }
+
+  .btn span {
+    font-size: 28px !important;
+    height: auto;
+  }
+
+  .btn-icon {
+    width: 170px !important;
+    height: 120px !important;
+    object-fit: cover;
+  }
+}
+@media (max-width: 768px) {
+  .baby-side {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    right: auto !important;
+    top: auto !important;
+    margin: 20px auto 0 !important;
+  }
+
+  .meme-video {
+    width: 150px !important;
+    max-width: 150px !important;
+    border-radius: 18px;
+  }
+  .baby-side {
+    transform: scale(1.15);
+  }
+  .baby-text h2 {
+    font-size: 22px !important;
+  }
 }
